@@ -1,52 +1,34 @@
 Windows Registry Editor Version 5.00
 
-; =========================
-; REMOVE OLD ENTRIES
-; =========================
 [-HKEY_CLASSES_ROOT*\shell\TakeOwnershipDelete]
 [-HKEY_CLASSES_ROOT\Directory\shell\TakeOwnershipDelete]
 [-HKEY_CLASSES_ROOT\Drive\shell\TakeOwnershipDelete]
 [-HKEY_CLASSES_ROOT\Directory\Background\shell\TakeOwnershipDelete]
 
-; =========================
-; FILE: TAKE OWNERSHIP + DELETE
-; =========================
 [HKEY_CLASSES_ROOT*\shell\TakeOwnershipDelete]
 @="Take Ownership + Delete"
 "HasLUAShield"=""
-"NoWorkingDirectory"=""
 "Position"="middle"
 
 [HKEY_CLASSES_ROOT*\shell\TakeOwnershipDelete\command]
 @="cmd.exe /c takeown /f "%1" && icacls "%1" /grant Everyone:F /grant Administrators:F /grant System:F /c && powershell -NoProfile -WindowStyle Hidden -Command "Remove-Item -LiteralPath \"%1\" -Force -ErrorAction SilentlyContinue""
 
-; =========================
-; FOLDER: TAKE OWNERSHIP + DELETE
-; =========================
 [HKEY_CLASSES_ROOT\Directory\shell\TakeOwnershipDelete]
 @="Take Ownership + Delete"
 "HasLUAShield"=""
-"NoWorkingDirectory"=""
 "Position"="middle"
 
 [HKEY_CLASSES_ROOT\Directory\shell\TakeOwnershipDelete\command]
 @="cmd.exe /c takeown /f "%1" /r /d y && icacls "%1" /grant Everyone:F /grant Administrators:F /grant System:F /t /c && powershell -NoProfile -WindowStyle Hidden -Command "Remove-Item -LiteralPath \"%1\" -Recurse -Force -ErrorAction SilentlyContinue""
 
-; =========================
-; DRIVE: TAKE OWNERSHIP
-; =========================
 [HKEY_CLASSES_ROOT\Drive\shell\TakeOwnershipDelete]
 @="Take Ownership"
 "HasLUAShield"=""
-"NoWorkingDirectory"=""
 "Position"="middle"
 
 [HKEY_CLASSES_ROOT\Drive\shell\TakeOwnershipDelete\command]
 @="cmd.exe /c takeown /f "%1\" /r /d y && icacls "%1\" /grant Everyone:F /grant Administrators:F /grant System:F /t /c"
 
-; =========================
-; CURRENT FOLDER BACKGROUND
-; =========================
 [HKEY_CLASSES_ROOT\Directory\Background\shell\TakeOwnershipDelete]
 @="Take Ownership + Delete (This Folder)"
 "HasLUAShield"=""
