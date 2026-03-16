@@ -1,54 +1,54 @@
 Windows Registry Editor Version 5.00
 
-; Remove old entries
-[-HKEY_CLASSES_ROOT\*\shell\TakeOwnershipDelete]
+; Remove previous entries
+[-HKEY_CLASSES_ROOT*\shell\TakeOwnershipDelete]
 [-HKEY_CLASSES_ROOT\Directory\shell\TakeOwnershipDelete]
 [-HKEY_CLASSES_ROOT\Drive\shell\TakeOwnershipDelete]
 [-HKEY_CLASSES_ROOT\Directory\Background\shell\TakeOwnershipDelete]
 
 ; =========================
-; FILE OWNERSHIP + DELETE
+; FILE: OWNERSHIP + DELETE
 ; =========================
-[HKEY_CLASSES_ROOT\*\shell\TakeOwnershipDelete]
-@="Take Ownership && Delete"
+[HKEY_CLASSES_ROOT*\shell\TakeOwnershipDelete]
+@="Take Ownership + Delete"
 "HasLUAShield"=""
 "NoWorkingDirectory"=""
 "Position"="middle"
 
-[HKEY_CLASSES_ROOT\*\shell\TakeOwnershipDelete\command]
-@="cmd.exe /c takeown /f \"%1\" && icacls \"%1\" /grant administrators:F /grant system:F /c && del /f /q \"%1\""
+[HKEY_CLASSES_ROOT*\shell\TakeOwnershipDelete\command]
+@="cmd.exe /c takeown /f "%1" && icacls "%1" /grant Everyone:F /grant administrators:F /grant system:F /c && powershell -windowstyle hidden -command "Remove-Item -LiteralPath '%1' -Force -ErrorAction SilentlyContinue""
 
 ; =========================
-; FOLDER OWNERSHIP + DELETE
+; FOLDER: OWNERSHIP + DELETE
 ; =========================
 [HKEY_CLASSES_ROOT\Directory\shell\TakeOwnershipDelete]
-@="Take Ownership && Delete"
+@="Take Ownership + Delete"
 "HasLUAShield"=""
 "NoWorkingDirectory"=""
 "Position"="middle"
 
 [HKEY_CLASSES_ROOT\Directory\shell\TakeOwnershipDelete\command]
-@="cmd.exe /c takeown /f \"%1\" /r /d y && icacls \"%1\" /grant administrators:F /grant system:F /t /c && rmdir /s /q \"%1\""
+@="cmd.exe /c takeown /f "%1" /r /d y && icacls "%1" /grant Everyone:F /grant administrators:F /grant system:F /t /c && powershell -windowstyle hidden -command "Remove-Item -LiteralPath '%1' -Recurse -Force -ErrorAction SilentlyContinue""
 
 ; =========================
-; DRIVE OWNERSHIP + DELETE
+; DRIVE: OWNERSHIP
 ; =========================
 [HKEY_CLASSES_ROOT\Drive\shell\TakeOwnershipDelete]
-@="Take Ownership && Delete"
+@="Take Ownership + Delete"
 "HasLUAShield"=""
 "NoWorkingDirectory"=""
 "Position"="middle"
 
 [HKEY_CLASSES_ROOT\Drive\shell\TakeOwnershipDelete\command]
-@="cmd.exe /c takeown /f \"%1\\\" /r /d y && icacls \"%1\\\" /grant administrators:F /grant system:F /t /c"
+@="cmd.exe /c takeown /f "%1\" /r /d y && icacls "%1\" /grant Everyone:F /grant administrators:F /grant system:F /t /c"
 
 ; =========================
-; CURRENT FOLDER
+; CURRENT FOLDER BACKGROUND
 ; =========================
 [HKEY_CLASSES_ROOT\Directory\Background\shell\TakeOwnershipDelete]
-@="Take Ownership && Delete (This Folder)"
+@="Take Ownership + Delete (This Folder)"
 "HasLUAShield"=""
 "Position"="middle"
 
 [HKEY_CLASSES_ROOT\Directory\Background\shell\TakeOwnershipDelete\command]
-@="cmd.exe /c takeown /f \"%V\" /r /d y && icacls \"%V\" /grant administrators:F /grant system:F /t /c && rmdir /s /q \"%V\""
+@="cmd.exe /c takeown /f "%V" /r /d y && icacls "%V" /grant Everyone:F /grant administrators:F /grant system:F /t /c && powershell -windowstyle hidden -command "Remove-Item -LiteralPath '%V' -Recurse -Force -ErrorAction SilentlyContinue""
