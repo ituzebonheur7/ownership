@@ -16,8 +16,8 @@ Windows Registry Editor Version 5.00
 "Position"="middle"
 
 [HKEY_CLASSES_ROOT\*\shell\TakeOwnership\command]
-@="powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/c takeown /f \\\"%1\\\" && icacls \\\"%1\\\" /grant administrators:F /grant system:F /c /l' -Verb runAs\""
-"IsolatedCommand"="powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/c takeown /f \\\"%1\\\" && icacls \\\"%1\\\" /grant administrators:F /grant system:F /c /l' -Verb runAs\""
+@="powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/c takeown /f \\\"%1\\\" /a && icacls \\\"%1\\\" /grant administrators:F /grant system:F /c /l' -Verb runAs\""
+"IsolatedCommand"="powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/c takeown /f \\\"%1\\\" /a && icacls \\\"%1\\\" /grant administrators:F /grant system:F /c /l' -Verb runAs\""
 
 ; =========================
 ; FOLDER OWNERSHIP
@@ -30,8 +30,8 @@ Windows Registry Editor Version 5.00
 "AppliesTo"="NOT (System.ItemPathDisplay:=\"C:\\Windows\" OR System.ItemPathDisplay:=\"C:\\Program Files\" OR System.ItemPathDisplay:=\"C:\\Program Files (x86)\" OR System.ItemPathDisplay:=\"C:\\Users\" OR System.ItemPathDisplay:=\"C:\\ProgramData\")"
 
 [HKEY_CLASSES_ROOT\Directory\shell\TakeOwnership\command]
-@="powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/c takeown /f \\\"%1\\\" /r /d y && icacls \\\"%1\\\" /grant administrators:F /grant system:F /t /c /l /q' -Verb runAs\""
-"IsolatedCommand"="powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/c takeown /f \\\"%1\\\" /r /d y && icacls \\\"%1\\\" /grant administrators:F /grant system:F /t /c /l /q' -Verb runAs\""
+@="powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/c takeown /f \\\"%1\\\" /a /r /d y && icacls \\\"%1\\\" /grant administrators:F /grant system:F /t /c /l /q' -Verb runAs\""
+"IsolatedCommand"="powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/c takeown /f \\\"%1\\\" /a /r /d y && icacls \\\"%1\\\" /grant administrators:F /grant system:F /t /c /l /q' -Verb runAs\""
 
 ; =========================
 ; DRIVE OWNERSHIP
@@ -44,8 +44,8 @@ Windows Registry Editor Version 5.00
 "AppliesTo"="NOT (System.ItemPathDisplay:=\"C:\\\")"
 
 [HKEY_CLASSES_ROOT\Drive\shell\TakeOwnership\command]
-@="cmd.exe /c takeown /f \"%1\\\" /r /d y && icacls \"%1\\\" /grant administrators:F /grant system:F /t /c"
-"IsolatedCommand"="cmd.exe /c takeown /f \"%1\\\" /r /d y && icacls \"%1\\\" /grant administrators:F /grant system:F /t /c"
+@="cmd.exe /c takeown /f \"%1\\\" /a /r /d y && icacls \"%1\\\" /grant administrators:F /grant system:F /t /c"
+"IsolatedCommand"="cmd.exe /c takeown /f \"%1\\\" /a /r /d y && icacls \"%1\\\" /grant administrators:F /grant system:F /t /c"
 
 ; =========================
 ; FOLDER BACKGROUND
@@ -56,4 +56,4 @@ Windows Registry Editor Version 5.00
 "Position"="middle"
 
 [HKEY_CLASSES_ROOT\Directory\Background\shell\TakeOwnership\command]
-@="cmd.exe /c takeown /f \"%V\" /r /d y && icacls \"%V\" /grant administrators:F /grant system:F /t /c"
+@="cmd.exe /c takeown /f \"%V\" /a /r /d y && icacls \"%V\" /grant administrators:F /grant system:F /t /c"
